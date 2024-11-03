@@ -1,0 +1,59 @@
+{% extends "tasks/base.html" %}
+{% load static %}
+{% block header %}
+<header class="header-box">
+	<img class="logo-jave" src="{% static 'tasks/img/logoPUJ-azul-01.png' %}" alt="Universidad Pontificia Javeriana" />
+	<div class="title-box">
+		<h1 class="title-text">URANUS</h1>
+		<p class="subtitle">Versión 2.0</p>	
+	</div>			
+</header>
+{% endblock %}
+{% block nav %}
+<nav id="nav" class="navigator">
+	<a href="/" class="icon fa-home"><span>Inicio</span></a>
+	<a href="/registro" class="icon fa-id-card-o"><span>Registro</span></a>
+	<a href="/introduccion" class="icon fa-gamepad"><span>Problemas</span></a>
+	<a href="/contacto" class="icon fa-envelope active"><span>Contacto</span></a>
+</nav>
+{% endblock %}
+{% block panel %}
+<!-- Contact -->
+<article id="contact" class="panel">
+	<header class="title-intro">
+		<h2>Contacto</h2>
+	</header>
+	<form action="/contact-action" method="post">
+		{% csrf_token %}
+		<div>
+			<div class="row">
+				<div class="col-6 col-12-medium">
+					<input type="text" name="name" placeholder="Nombre" />
+				</div>
+				<div class="col-6 col-12-medium">
+					<input type="text" name="email" placeholder="Email" />
+				</div>
+				<div class="col-12">
+					<input type="text" name="subject" placeholder="Asunto" />
+				</div>
+				<div class="col-12">
+					<textarea name="message" placeholder="Mensaje" rows="6"></textarea>
+				</div>
+				<div class="col-12">
+					<input type="submit" value="Enviar" />
+				</div>
+			</div>
+		</div>
+	</form>
+</article>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block scripts %}
+<script>
+	var firsht = false;
+	$(document).ready(function() {					
+		$('.fa-home').removeClass('active');
+	});
+</script>
+{% endblock %}

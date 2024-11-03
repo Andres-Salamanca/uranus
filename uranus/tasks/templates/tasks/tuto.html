@@ -1,0 +1,63 @@
+{% extends "tasks/base.html" %}
+{% load static %}
+{% block panel %}
+<!-- Work -->
+<article id="work" class="panel">
+	<div class="task2-box">
+		<section>
+			<div class="row">
+				<div class="col-9 col-12-medium col-12-small game-box">
+					<div class="titile-header-box">
+						<p class="title-game">
+							<h1>Indicaciones</h1>
+						</p>
+					</div>
+					<div class="canvas-box clearfix">
+						<p class="tuto">Usa los controles en la parte derecha de la pantalla para asignar los valores a las variables. Puedes usar el mouse para arrastrar la barra roja. Usa las teclas  para mover más despacio la aguja. <div><img class="keypad-box tuto-img" src="{% static 'tasks/img/arrows.png' %}"></div>
+					</div>
+					<div class="tuto-btn">
+						<form action="/problema" method="post">
+							{% csrf_token %}
+							<input id="user-session" name="user-session" type="text" value="{{ session_id }}" class="disiable" />
+							<input id="intro" type="submit" value="Iniciar"/>
+						</form>
+					</div>
+				</div>
+				<div class="col-3 col-12-medium col-12-small">
+					<div class="row ctr-box">
+						<div class="gauge-box">		
+							<div>									
+								<canvas class="gauge-constVar" name="{{problem.var1_name}}"></canvas>	
+							</div>
+							<div class="tooltip">															
+								<input type="range" class="indicator slider-range-constVar" orient="horizontal" value="0" max="100"/>
+							</div>
+						</div>
+						<div class="gauge-box">		
+							<div>								
+								<canvas class="gauge-dpdVar" name="{{problem.var2_name}}"></canvas>								
+							</div>		
+							<div class="tooltip">								
+								<input type="range" class="indicator slider-range-dpdVar" orient="horizontal" value="0" max="100"/>
+							</div>
+						</div>
+						<div class="gauge-box">
+							<button class="attempt-action no-active" name="fluid" disabled>Intentar</button>
+						</div>
+					</div>	
+				</div>										
+			</div>
+		</section>		
+	</div>
+</article>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'tasks/js/include/gauge.min.js' %}"></script>
+<script src="{% static 'tasks/js/reloj.js' %}"></script>
+<script>
+	$('#wrapper').addClass('game-mode');
+	$('.is-preload').addClass('ajust-body');
+	var firsht = 0;	
+	loadGauge();
+</script>
+{% endblock %}

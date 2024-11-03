@@ -1,0 +1,38 @@
+{% extends "tasks/base.html" %}
+{% load static %}
+{% block header %}
+<header class="header-box" style="text-align: center;">
+	<img class="logo-jave" src="{% static 'tasks/img/logoPUJ-azul-01.png' %}" alt="Universidad Pontificia Javeriana" />
+</header>
+{% endblock %}
+{% block nav %}
+<nav id="nav" class="navigator">
+	<a href="/" class="icon fa-home"><span>Inicio</span></a>
+	<a href="/registro" class="icon fa-id-card-o"><span>Registro</span></a>
+	<a href="/introduccion" class="icon fa-gamepad"><span>Problemas</span></a>
+	<a href="/contacto" class="icon fa-envelope"><span>Contacto</span></a>
+</nav>
+{% endblock %}
+{% block panel %}
+<!-- Welcome -->
+<article id="welcome" class="panel">					
+	<section class="tiles">
+		<div style="text-align: center; width: 100%;">
+			<div class="description-box" style="text-align: center !important;">
+				<div id="splash-canvas-obj"></div>								
+			</div>
+			<div>
+				<input id="fwreg" type="submit" value="Registro" class="start-action" />
+			</div>
+		</div>
+	</section>
+</article>
+{% endblock %}
+{% block scripts %}
+<script>
+	var firsht = false;
+</script>
+<script src="{% static 'tasks/js/include/p5.min.js' %}"></script>
+<script src="{% static 'tasks/js/splashSketch.js' %}"></script>
+{% endblock %}
+

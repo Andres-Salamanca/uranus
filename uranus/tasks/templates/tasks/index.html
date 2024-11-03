@@ -1,0 +1,459 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+	<!-- Head-->
+	<head>
+		<title>URANUS - Pontificia Universidad Javeriana</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'tasks/css/w3.css' %}">
+		<link rel="stylesheet" href="{% static 'tasks/css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'tasks/css/tasks.css' %}" />
+		<link rel="stylesheet" href="{% static 'tasks/css/jquery-ui.css' %}">
+		<noscript><link rel="stylesheet" href="{% static 'tasks/css/noscript.css' %}" /></noscript>
+	</head>
+
+	<!-- Body-->
+	<body class="is-preload">
+
+		<!-- header-->
+		<header class="header-box">
+			<img class="logo-jave" src="{% static 'tasks/img/logoPUJ-azul-01.png' %}" alt="Universidad Pontificia Javeriana" />
+			<div class="title-box">
+				<h1 class="title-text">URANUS</h1>
+				<p class="subtitle">Versión 2.0</p>	
+			</div>			
+		</header>
+
+		<!-- Wrapper-->
+		<div id="wrapper">
+
+			<!-- Nav -->
+			<nav id="nav" class="navigator">
+				<a href="#welcome" class="icon fa-home"><span>Inicio</span></a>
+				<a href="#register" class="icon fa-id-card-o"><span>Registro</span></a>
+				<a href="#home" class="icon fa-gamepad"><span>Problemas</span></a>
+				<a href="#contact" class="icon fa-envelope"><span>Contacto</span></a>
+			</nav>
+
+			<!-- Main -->
+			<div id="main">
+				<!-- Welcome -->
+				<article id="welcome" class="panel">					
+					<section class="tiles">
+						<div style="text-align: center;">
+							<div class="title-header title-intro">
+								<h2>Experimento Cambio Cognitivo</h2>
+							</div>
+							<div class="description-box">
+								<p>La presente investigación se propone identificar y caracterizar la variabilidad intra e intersujeto en lo relativo a los patrones de ejecución en la resolución de una serie de problemas presentados de forma aleatoria a través de la aplicación URANUS.</p>
+								<p>URANUS es un software interactivo que captura los valores que el resolutor da a las variables A y B en los distintos intentos, retroalimenta de forma inmediata el procedimiento hecho y una vez finalizados los problemas URANUS analiza los procedimientos de los resolutores por segmentos para las dimensiones del control de variables y la covariación. URANUS posee un repositorio complejo de datos que permite seguir minuciosamente la actividad del sujeto y clasificar automáticamente.</p>								
+							</div>
+							<div>
+								<input id="fwreg" type="submit" value="Registro" class="start-action" />
+							</div>
+						</div>
+					</section>
+				</article>
+
+				<!-- Register -->
+				<article id="register" class="panel">
+					<form action="/register" method="post">
+						{% csrf_token %}
+						<div>
+							<div class="row">
+								<div class="title-header">
+									<h2>Registro</h2>
+								</div>
+								<div class="col-6 col-12-medium">
+									<input type="text" name="alias" id="alias" placeholder="Ingresa un alias" class="input-action">
+								</div>											
+								<div class="col-6 col-12-medium">
+									<input class="w3-animate-opacity disiable" type="text" name="datepicker" id="datepicker" placeholder="Ingresa tu fecha de nacimiento">
+								</div>
+								<div class="col-6 col-12-medium">
+									<select id="gender" name="gender" class="w3-animate-opacity gender-action disiable">
+										<option value="" disabled selected>Selecciona tu genero</option>
+										<option value="F">Femenino</option>
+										<option value="M">Masculino</option>
+									</select>
+								</div>
+								<div class="col-6 col-12-medium">
+									<select id="level" name="level" class="level-action w3-animate-opacity disiable">
+										<option value="" disabled selected>Selecciona tu nivel de escolaridad</option>
+										<option value="P">Primaria</option>
+										<option value="S">Secundaria</option>
+										<option value="U">Universitaria</option>
+									</select>	
+								</div>
+								<div class="col-6 col-12-medium">
+									<select id="departament" name="departament" class="departament-action w3-animate-opacity disiable">
+										<option value="" disabled selected>Selecciona tu departamento (Ej.: Boyacá)</option>
+										{% for entity in entities %}
+    										<option value="{{ entity.id }}">{{ entity.department }}</option>
+										{% endfor %}
+									</select>	
+								</div>
+								<div class="col-6 col-12-medium">
+									<select id="city" name="city" class="city-action w3-animate-opacity disiable"></select>	
+								</div>
+								<div class="col-6 col-12-medium">
+									<select id="institute" name="institute" class="institute-action w3-animate-opacity disiable"></select>	
+								</div>								
+								<div class="col-6 col-12-medium">
+ 									<select id="grade-primary" name="grade_primary" class="grade-primary-action w3-animate-opacity disiable">
+										<option value="" disabled selected>Ingresa tu grado</option>
+										<option value="1g">1°</option>
+										<option value="2g">2°</option>
+										<option value="3g">3°</option>
+										<option value="4g">4°</option>
+										<option value="5g">5°</option>										
+									</select>
+								</div>
+								<div class="col-6 col-12-medium">
+ 									<select id="grade-secundary" name="grade_secundary" class="grade-secundary-action w3-animate-opacity disiable">
+										<option value="" disabled selected>Ingresa tu grado</option>
+										<option value="6g">6°</option>
+										<option value="7g">7°</option>
+										<option value="8g">8°</option>
+										<option value="9g">9°</option>
+										<option value="10g">10°</option>
+										<option value="11g">11°</option>
+										<option value="12g">12°</option>										
+									</select>
+								</div>
+								<div id="facult" class="col-6 col-12-medium w3-animate-opacity disiable">
+									<input type="text" name="facult" placeholder="Ingresa tu facultad" class="facult-action">
+								</div>
+								<div class="col-6 col-12-medium">
+									<input type="text" name="semester" id="semester" placeholder="Ingresa tu semestre" class="semester-action w3-animate-opacity disiable">
+								</div>								
+								<div class="col-12">
+									<input id="reg" type="submit" value="Registrar" class="no-active" disabled />
+									<p class="abeas">En el marco de la ley 1581 de 2012, conocida como Ley de Protección de Datos Personales, al dar clic en el botón de: 'Registrar'; autorizo el tratamiento de mis datos personales para efectos de la investigación en curso con el presente aplicativo.</p>									
+								</div>
+							</div>
+						</div>
+					</form>
+				</article>
+
+				<!-- Intro -->
+				<article id="home" class="panel">					
+					<section class="tiles">
+						<div>
+							<div class="title-header">
+								<h2>Introducción </h2>
+							</div>
+							<div class="description-box">
+								<p>A continuación se presentan tres problemas físico-matemáticos a solucionar: movimiento rectilíneo, movimiento de un fluido y balanza de pesos. Cada problema consiste en determinar el valor de dos variables para lograr un resultado que se acerque a un objetivo o valor meta. Los valores de las variables son escalares, es decir, se da el valor que indica su extensión sin ninguna unidad. Se pueden realizar hasta 15 intentos para lograr resolver el problema. Los problemas se presentan de forma aleatoria y a medida que se van resolviendo se procede con el siguiente hasta terminar con los tres problemas. Por último se presentan unas tareas de control.</p>
+								<p>Para asignar los valores a las variables en la parte derecha de cada problema se puede apreciar dos controles los cuales cada uno representa una variable del problema. Por medio de la barra de desplazamiento se puede asignar el valor de la variable. Al dar clic sobre el botón de “Intentar” el juego realiza la simulación a partir de los valores indicados a través de los controles.</p>
+								<p>A continuación al dar clic sobre los botones de detalle se puede obtener más información sobre el problema. O al dar clic en el botón de “Iniciar” se inicia el desarrollo de uno de los problemas:</p>
+							</div>
+							<div>
+								<input id="intro" type="submit" value="Iniciar" class="init-action" />
+							</div>
+						</div>
+						<article class="style1">
+							<span class="image">
+								<img src="{% static 'tasks/img/runPreview.png' %}" alt="" />
+							</span>
+							<div class="intro-msg-box" msg="m1">
+								<h2>Movimiento Rectilíneo </h2>
+							</div>
+						</article>
+						<article class="style2">
+							<span class="image">
+								<img src="{% static 'tasks/img/fluidPreview.png' %}" alt="" />
+							</span>
+							<div class="intro-msg-box" msg="m2">
+								<h2>Movimiento de un Fluido </h2>
+							</div>
+						</article>
+						<article class="style3">
+							<span class="image">
+								<img src="{% static 'tasks/img/balancePreview.png' %}" alt="" />
+							</span>
+							<div class="intro-msg-box" msg="m3">
+								<h2>Balanza de Pesos </h2>
+							</div>
+						</article>
+					</section>
+				</article>
+				
+				<!-- Work -->
+				<article id="work" class="panel">
+					<div class="task1-box">												
+						<section>
+							<div class="row">
+								<div class="col-9 col-12-medium col-12-small game-box">
+									<div class="titile-header-box">
+										<p class="title-game">
+										<strong>Tarea 1: </strong>Usa la barra de desplazamiento de cada control de velocidad y tiempo ubicados en la parte derecha de la pantalla para cubrir la distancia hasta la meta.
+										</p>
+									</div>
+									<div class="canvas-box clearfix">
+										<div id="linear-move-canvas-obj"></div>
+									</div>
+								</div>
+								<div class="col-3 col-12-medium col-12-small">
+									<div class="row ctr-box">
+										<div class="gauge-box">											
+											<canvas class="gauge-constVar" name="Velocidad"></canvas>
+											<div>											
+												<input type="range" class="indicator slider-range-constVar" orient="horizontal" value="0" max="100"/>
+											</div>
+										</div>
+										<div class="gauge-box">											
+											<canvas class="gauge-dpdVar" name="Tiempo"></canvas>											
+											<div>
+											<input type="range" class="indicator slider-range-dpdVar" orient="horizontal" value="0" max="100"/>
+											</div>
+										</div>
+										<div class="gauge-box">
+											<button class="attempt-action" name="linear">Intentar</button>
+										</div>
+									</div>	
+								</div>								
+							</div>
+						</section>
+					</div>
+					<div class="task2-box">
+						<section>
+							<div class="row">
+								<div class="col-9 col-12-medium col-12-small game-box">
+									<div class="titile-header-box">
+										<p class="title-game">
+										<strong>Tarea 2: </strong>Usa la barra de desplazamiento de cada control de apertura de la llave y tiempo de la llave abierta en la parte derecha de la pantalla para llenar el lavaplatos.
+										</p>
+									</div>
+									<div class="canvas-box clearfix">
+										<div id="fluid-move-canvas-obj"></div>
+									</div>
+								</div>
+								<div class="col-3 col-12-medium col-12-small">
+									<div class="row ctr-box">
+										<div class="gauge-box">											
+											<canvas class="gauge-constVar" name="Amplitud"></canvas>	
+											<div>										
+											<input type="range" class="indicator slider-range-constVar" orient="horizontal" value="0" max="100"/>
+											</div>
+										</div>
+										<div class="gauge-box">										
+											<canvas class="gauge-dpdVar" name="Tiempo"></canvas>										
+											<div>
+											<input type="range" class="indicator slider-range-dpdVar" orient="horizontal" value="0" max="100"/>
+											</div>
+										</div>
+										<div class="gauge-box">
+											<button class="attempt-action" name="fluid">Intentar</button>
+										</div>
+									</div>	
+								</div>										
+							</div>
+						</section>		
+					</div>
+					<div class="task3-box">
+						<section>
+							<div class="row">
+								<div class="col-9 col-12-medium col-12-small game-box">
+									<div class="titile-header-box">
+										<p class="title-game">
+										<strong>Tarea 3: </strong>Usa la barra de desplazamiento de cada control de peso del niño y distancia respecto al pivote en la parte derecha de la pantalla para equilibrar la balanza.
+										</p>
+									</div>
+									<div class="canvas-box clearfix">
+										<div id="balance-move-canvas-obj"></div>
+									</div>
+								</div>
+								<div class="col-3 col-12-medium col-12-small">
+									<div class="row ctr-box">
+										<div class="gauge-box">
+											<canvas class="gauge-constVar" name ="Distancia"></canvas>
+											<div>
+											<input type="range" class="indicator slider-range-constVar" orient="horizontal" value="0" max="100"/>
+											</div>
+										</div>
+										<div class="gauge-box">
+											<canvas class="gauge-dpdVar" name="Peso"></canvas>
+											<div>
+											<input type="range" class="indicator slider-range-dpdVar" orient="horizontal" value="0" max="100"/>
+											</div>
+										</div>
+										<div class="gauge-box">
+											<button class="attempt-action" name="balance">Intentar</button>
+										</div>
+									</div>	
+								</div>										
+							</div>
+						</section>						
+					</div>
+				</article>
+
+				<!-- Contact -->
+				<article id="contact" class="panel">
+					<header class="title-intro">
+						<h2>Contacto</h2>
+					</header>
+					<form action="#" method="post">
+						<div>
+							<div class="row">
+								<div class="col-6 col-12-medium">
+									<input type="text" name="name" placeholder="Nombre" />
+								</div>
+								<div class="col-6 col-12-medium">
+									<input type="text" name="email" placeholder="Email" />
+								</div>
+								<div class="col-12">
+									<input type="text" name="subject" placeholder="Asunto" />
+								</div>
+								<div class="col-12">
+									<textarea name="message" placeholder="Mensaje" rows="6"></textarea>
+								</div>
+								<div class="col-12">
+									<input type="submit" value="Enviar" />
+								</div>
+							</div>
+						</div>
+					</form>
+				</article>
+			</div>
+
+			<!-- Footer -->
+			<div id="footer">
+				<ul class="copyright">
+					<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+
+		</div>
+		<div id="global" class="disiable" university="false" prymary="false" secundary="false"></div>
+		<div id="csrftoken" class="disiable">{% csrf_token %}</div>
+
+		<!-- Modal -->		
+		<div id="msg-modal" title="">
+		</div>	
+
+		<!-- Modal M1-->		
+		<div id="m1" class="m-modal">
+			<h2>Halla la distancia hasta la meta</h2>
+			<div class="description-box">
+				<p>El problema de movimiento rectilíneo se da en el contexto de una carrera llevada a cabo por un  maratonista (el niño corredor como se puede apreciar en la imagen) que con ayuda de los controles de variable se debe determinar la velocidad que debe imprimirse al niño  y el tiempo que debe durar el niño corriendo para cubrir una distancia hasta llegar al punto exacto de la meta. Si el niño se pasa de la meta se considera como un intento inválido ya que el niño debe quedar justo en la meta.  </p>
+			</div>
+			<button class="hide-modal-action">OK</button>
+		</div>
+
+		<!-- Modal M2-->		
+		<div id="m2" class="m-modal">
+			<h2>Halla el nivel de agua adecuado</h2>
+			<div class="description-box">
+				<p>El problema de movimiento de un fluido se da en el contexto de una cocina en donde se debe determinar la apertura de la llave y el tiempo que debe durar la llave abierta para dar con el nivel de agua requerido en el lavaplatos. Si el nivel del agua sobrepasa el nivel requerido el intento se considerara inválido ya que se requiere que el agua llegue justo al nivel requerido.</p>
+			</div>
+			<button class="hide-modal-action">OK</button>
+		</div>
+
+		<!-- Modal M3-->		
+		<div id="m3" class="m-modal">
+			<h2>Halla el punto de equilibrio</h2>
+			<div class="description-box">
+				<p>El problema de balanza de pesos se da en el contexto de un parque de diversiones en donde se debe  determinar el peso del niño y la distancia respecto al pivote (eje de rotación) para que la balanza quede horizontalmente en equilibrio.</p>
+			</div>
+			<button class="hide-modal-action">OK</button>
+		</div>	
+
+		<!-- Include Scripts -->
+		<script src="{% static 'tasks/js/include/jquery.min.js' %}"></script>
+		<script src="{% static 'tasks/js/include/browser.min.js' %}"></script>
+		<script src="{% static 'tasks/js/include/breakpoints.min.js' %}"></script>
+		<script src="{% static 'tasks/js/include/util.js' %}"></script>
+		<script src="{% static 'tasks/js/include/main.js' %}"></script>
+  		<script src="{% static 'tasks/js/include/jquery-ui.js' %}"></script>
+  		<script src="{% static 'tasks/js/include/gauge.min.js' %}"></script>
+  		<script src="{% static 'tasks/js/include/p5.min.js' %}"></script>
+
+		<!-- Generate Script -->
+		<script>
+			var w;
+			var bg;
+			var x, y;
+			var cursor = 0;
+			var index = 0;
+			var tks = [];
+			var order = [];
+			var limit;
+			var dpdVar = 0;
+			var constVar = 0;
+			var slope = 0;
+			var topVar = 0;
+			var runFlag = false;
+			var error = 25;
+			var goal = 500;
+			var dpdMX = 100;
+			var constMX = 100;
+
+			let gaugePS;
+			let dpdVarGauge;
+			var pointerC = 0;
+
+			var success = false;
+			
+			$(document).ready(function() {
+				// Seed tks.
+				tks[1] = '.task1-box';
+				tks[2] = '.task2-box';
+				tks[3] = '.task3-box';
+				//tks.push({id:'3', key:'.task3-box'});
+
+				{% if idx >= 0 %} 
+					cursor = {{ idx }};					
+				{% endif %}	
+
+				// Seed order
+				{% for ord in order %}
+				order.push({{ord}});
+				{% endfor %}
+				if(order.length) {						
+														
+					switch(tks[order[cursor]]) {
+						case '.task1-box':
+							x = 10;
+							goal = 900;
+							index = 0;
+						break;
+						case '.task2-box':
+							x = 0;
+							goal = 70;
+							index = 1;
+						break;
+						case '.task3-box':
+							x = 0;
+							goal = 5000;
+							index = 2;
+						break;
+					}
+
+					loadGauge();
+
+					$('.header-box').hide();
+					$('.navigator').hide();
+					$('#footer').hide();
+					$('#wrapper').addClass('game-mode');
+
+					//$('.task3-box').show();
+					pointerC = cursor;
+					$(tks[order[cursor]]).show();					
+				}
+			});
+		</script>
+
+		<!-- Sketchs Scripts -->
+		<script src="{% static 'tasks/js/runSketch.js' %}"></script>
+		<script src="{% static 'tasks/js/fluidSketch.js' %}"></script>
+		<script src="{% static 'tasks/js/balanceSketch.js' %}"></script>
+		<script src="{% static 'tasks/js/sketch.js' %}"></script>
+
+		<!-- APP Scripts -->				 
+		<script src="{% static 'tasks/js/reloj.js' %}"></script>  
+		<script src="{% static 'tasks/js/models.js' %}"></script>
+		<script src="{% static 'tasks/js/app.js' %}"></script>		
+	</body>
+</html>

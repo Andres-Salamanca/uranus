@@ -1,0 +1,55 @@
+{% extends "tasks/base.html" %}
+{% load static %}
+{% block header %}
+<header class="header-box">
+	<img class="logo-jave" src="{% static 'tasks/img/logoPUJ-azul-01.png' %}" alt="Universidad Pontificia Javeriana" />
+	<div class="title-box">
+		<h1 class="title-text">URANUS</h1>
+		<p class="subtitle">Versión 2.0</p>	
+	</div>			
+</header>
+{% endblock %}
+{% block nav %}
+<nav id="nav" class="navigator">
+	<a href="/" class="icon fa-home"><span>Inicio</span></a>
+	<a href="/registro" class="icon fa-id-card-o"><span>Registro</span></a>
+	<a href="/introduccion" class="icon fa-gamepad active"><span>Problemas</span></a>
+	<a href="/contacto" class="icon fa-envelope"><span>Contacto</span></a>
+</nav>
+{% endblock %}
+{% block panel %}
+<!-- Intro -->
+<article id="home" class="panel">					
+	<section class="tiles">
+		<div>
+			<div class="title-header">
+				<h2>Bienvenid@ </h2>
+			</div>
+			<div class="description-box">
+				<br>
+				<p>Te invitamos a resolver tres tareas.</p> 
+				<p>En cada una encontrarás la descripción de una situación y dos relojes que podrás utilizar para darle valores a las medidas que se indican con el fin de alcanzar lo que se te pedirá.</p>
+				<p>Tienes derecho a <strong>15 intentos</strong> para resolver cada tarea. Supera el reto en la <strong>menor cantidad de intentos</strong>, pero si no lo logras no te desanimes, lo importante para nosotros es poder estudiar el proceso que sigas.</p>
+				<p>Muchas gracias.</p>
+				<br>
+			</div>
+			<div>
+				<form action="/indicaciones" method="post">
+					{% csrf_token %}
+					<input id="user-session" name="user-session" type="text" value="{{ session_id }}" class="disiable" />
+					<input id="intro" type="submit" value="Continuar"/>
+				</form>
+			</div>
+		</div>
+		
+	</section>
+</article>
+{% endblock %}
+{% block scripts %}
+<script>
+	var firsht = false;	
+	$(document).ready(function() {		
+		$('.fa-home').removeClass('active');
+	});
+</script>
+{% endblock %}

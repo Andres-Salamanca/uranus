@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="es">
+	<!-- Head-->
+	<head>
+		<link rel="shortcut icon" href="{% static 'tasks/img/favicon.ico' %}" type="image/x-icon">
+		<link rel="icon" href="{% static 'tasks/img/favicon.ico' %}" type="image/x-icon">
+		<title>URANUS - Pontificia Universidad Javeriana</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'tasks/css/w3.css' %}">
+		<link rel="stylesheet" href="{% static 'tasks/css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'tasks/css/tasks.css' %}" />
+		<link rel="stylesheet" href="{% static 'tasks/css/jquery-ui.css' %}">
+		<noscript><link rel="stylesheet" href="{% static 'tasks/css/noscript.css' %}" /></noscript>
+		{% block css %}{% endblock %}
+	</head>
+	<!-- Body-->
+	<body class="is-preload">
+		<!-- header-->
+		{% block header %}{% endblock %}
+		<!-- Wrapper-->
+		<div id="wrapper">
+			<!-- Nav -->
+			{% block nav %}{% endblock %}
+			<!-- Main -->
+			<div id="main">
+				{% block panel %}{% endblock %}
+			</div>
+			<!-- Footer -->
+			{% block footer %}{% endblock %}
+		</div>
+		<div id="global" class="disiable" university="false" prymary="false" secundary="false" session=""></div>
+		<div id="csrftoken" class="disiable">{% csrf_token %}</div>
+		<!-- Modal -->		
+		<div id="msg-modal" title="">
+		</div>	
+		<div id="message-modal">
+		</div>
+		<div id="signal">			
+		</div>
+		<!-- Modals-->
+		{% block modals %}{% endblock %}			
+		<!-- Include Scripts -->
+		<script src="{% static 'tasks/js/include/jquery.min.js' %}"></script>
+		<script src="{% static 'tasks/js/include/browser.min.js' %}"></script>
+		<script src="{% static 'tasks/js/include/breakpoints.min.js' %}"></script>
+		<script src="{% static 'tasks/js/include/util.js' %}"></script>
+		<script src="{% static 'tasks/js/include/main.js' %}"></script>
+  		<script src="{% static 'tasks/js/include/jquery-ui.js' %}"></script>  		
+		<!-- APP Scripts -->
+		{% block scripts %}{% endblock %}										 
+		<script src="{% static 'tasks/js/app.js' %}"></script>		
+	</body>
+</html>

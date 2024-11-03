@@ -1,0 +1,184 @@
+.disiable {
+	display: none;
+}
+
+.no-active {
+	cursor: not-allowed !important;
+	opacity: 0.3;
+}
+
+.indicator {
+    border: solid;
+}
+
+.ctr-box {
+	/*width: 70%;*/
+    min-width: 282px;
+    height: 100%;
+    margin: 0px auto;
+    background-color: #155f7f42;
+    border: solid 11px #155f7f1c;
+    border-radius: 11px;
+    padding: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.game-box {
+    min-width: 463px;    
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    padding: 5px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 320px;
+    background-color: #02578dd4;
+    color: #e3e3e3;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 110%;
+    padding: 5px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.keypad-box {
+    text-align: center;
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      -webkit-appearance: none;
+      background-color: rgb(255, 255, 255);
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: rgb(255, 0, 0);
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor: ew-resize;
+      background: rgb(255, 0, 0);
+      box-shadow: -80px 0 0 80px rgb(255, 0, 0);
+    }
+}
+
+/* FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+}
+
+.show-pimage-action {
+  color: #c2d5de;
+  cursor: pointer;
+}
+
+.msg-box {
+  top: 5% !important;
+}
+
+#message-modal {
+  display: none;
+  position: fixed;
+  z-index: 22;
+  width: 400px;
+  /* height: 150px; */
+  padding: 10px;
+  background-color: #51b4ac;
+  border-radius: 11px;
+  top: calc(50% - 75px);
+  left: calc(50% - 200px);
+  color: beige;  
+}
+
+#signal {
+  display: none;
+  position: fixed;
+  width: 210px;
+  height: 470px;
+  top: 8%;
+  left: 77%;
+  border: 10px solid #f06060;
+  border-radius: 33px;
+}
+
+.tuto {
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 66px;
+}
+
+.tuto-img {
+  margin: 0 auto;
+  width: 50px;  
+}
+
+.tuto-btn {
+  margin: 22px auto;
+  width: 112.19px;
+}
+
+.move-right {
+  text-align: right;
+}
+
+.ajust-body {
+  height: auto !important;
+}
+
+.continue-action {
+  display: none;
+}
+
+.indicartor-box {
+  display: none;
+  position: fixed;
+    right: 80px;
+    top: 63%;
+    z-index: 10;
+    color: red;
+    font-size: 11px;
+}

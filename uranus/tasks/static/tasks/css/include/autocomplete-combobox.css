@@ -1,0 +1,26 @@
+.ui-combobox-button {
+	display: none !important;
+}
+
+.ui-combobox-input {
+	width: 100% !important;
+
+	    /*position: relative;
+    top: -47px;
+    background-color: transparent;
+    border: none;*/
+
+	-webkit-appearance: none;
+	border: 0;
+	background: #f4f4f4;
+	width: 100%;
+	-moz-transition: background-color .25s ease-in-out;
+	-webkit-transition: background-color .25s ease-in-out;
+	-ms-transition: background-color .25s ease-in-out;
+	transition: background-color .25s ease-in-out;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #777777;
+	line-height: 1.75em;
+	border: none !important;
+	padding: 11px;
+}

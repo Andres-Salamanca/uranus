@@ -1,0 +1,143 @@
+{% extends "tasks/base.html" %}
+{% load static %}
+{% block panel %}
+<!-- Work -->
+<article id="work" class="panel">
+	<div class="task2-box">
+		<section>
+			<div class="row">
+				<div class="col-9 col-12-medium col-12-small game-box">
+					<div class="titile-header-box">
+						<p class="title-game">
+							Tarea 2: {{problem.short_description}}
+						</p>
+					</div>
+					<div class="canvas-box clearfix">
+						<div id="fluid-move-canvas-obj"></div>
+					</div>
+				</div>
+				<div class="col-3 col-12-medium col-12-small">
+					<div class="row ctr-box">
+						<div class="gauge-box">		
+							<div>									
+								<canvas class="gauge-constVar" name="{{problem.var1_name}}"></canvas>	
+							</div>
+							<div class="tooltip">
+								<span id="tooltiptext1" class="tooltiptext">Puedes usar el mouse para arrastrar la barra roja. Usa las teclas  para mover más despacio la aguja.<img class="keypad-box" src="{% static 'tasks/img/arrows.png' %}"></span>										
+								<input type="range" class="indicator slider-range-constVar" orient="horizontal" value="0" max="100"/>
+							</div>
+						</div>
+						<div class="gauge-box">		
+							<div>								
+								<canvas class="gauge-dpdVar" name="{{problem.var2_name}}"></canvas>								
+							</div>		
+							<div class="tooltip">
+								<span id="tooltiptext2" class="tooltiptext">Puedes usar el mouse para arrastrar la barra roja. Usa las teclas  para mover más despacio la aguja.<img class="keypad-box" src="{% static 'tasks/img/arrows.png' %}"></span>
+								<input type="range" class="indicator slider-range-dpdVar" orient="horizontal" value="0" max="100"/>
+							</div>
+						</div>
+						<div class="gauge-box">
+							<button class="attempt-action" name="fluid">Intentar</button>
+						</div>
+					</div>	
+				</div>										
+			</div>
+		</section>		
+	</div>
+</article>
+{% endblock %}
+{% block modals %}
+<div class="indicartor-box">
+	<span>Valor del intento pasdo</span>
+</div>
+{% if representation_flag %}
+<!-- Modal M1-->		
+<div id="m2" class="m-modal">
+	<h2>Pregunta</h2>
+	<div class="des-box">
+	</div>
+	<button class="recorder-action">Grabar</button>
+	<button class="continue-action">Terminar</button>
+</div>
+<div id="m3" class="m-modal">
+	<h2>Información</h2>
+	<div>
+		<p>A partir de ahora te vamos hacer unas preguntas y vamos a grabar tu voz. Si te aparece un mensaje de habilitación del micrófono por favor dale clic en: ‘Permitir’ o ‘Aceptar’. A continuación  por favor da clic en el botón: ‘Ok’ y luego efectúa un intento.</p>
+	</div>
+	<button class="info-ok-action">OK</button>
+</div>
+{% endif %}	
+{% endblock %}
+{% block scripts %}
+<script>
+	var w;
+	var bg;
+	var x, y;
+	var cursor = 0;
+	var index = 0;
+	var secuency = 0;
+	var tks = [];
+	var order = [];
+	var limit;
+	var dpdVar = 0;
+	var constVar = 0;
+	var slope = 0;
+	var topVar = 0;
+	var runFlag = false;
+	var spaceDist = ({{problem.var2_max}} * {{problem.var1_max}}) - ({{problem.var2_min}} * {{problem.var1_min}});
+	var error = {{problem.error_allowed}};
+	var goal = ({{goal}} / 100);
+	var dpdMX = {{problem.var1_max}};
+	var constMX = {{problem.var2_max}};
+	var attemptsLimit = {{problem.attempts_limit}};
+	var representationFlag = {{representation_flag}};
+	var fileName = '{{file_name}}';
+	let gaugePS;
+	let dpdVarGauge;
+	var firsht = {{firsht_flag}};
+	var pointerC = 0;
+	var success = false;
+	var sessionID = {{ session_id }};
+	var resolutionID = {{ resolution_id }};	
+
+	{% if representation_flag %}
+		runFlag = true;		
+	{% endif %}
+	
+	$(document).ready(function() {	
+		$('.is-preload').addClass('ajust-body');	
+		$('#wrapper').addClass('game-mode');
+		$("#msg-modal").dialog({
+			autoOpen: false,
+			dialogClass: "msg-box",
+			buttons: [				
+				{
+					text: "Ok",
+					{% if representation_flag %}
+					click: function() {
+						$("#msg-modal").dialog("close");
+						$(".attempt-action").removeClass('no-active');
+					}
+					{% else %}
+					click: fluidAgain
+					{% endif %}
+				}
+			],
+			closeOnEscape: false,
+		    open: function(event, ui) {
+		        $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+		    }
+		});
+		loadGauge();		
+	});
+</script>
+{% if representation_flag %}
+<script src="{% static 'tasks/include/recorder.js' %}"></script>
+<script src="{% static 'tasks/js/record.js' %}"></script>
+{% endif %}
+<script src="{% static 'tasks/js/include/gauge.min.js' %}"></script>
+<script src="{% static 'tasks/js/include/p5.min.js' %}"></script>
+<script src="{% static 'tasks/js/reloj.js' %}"></script>  
+<script src="{% static 'tasks/js/models.js' %}"></script>		
+<script src="{% static 'tasks/js/fluidSketch.js' %}"></script>
+{% endblock %}

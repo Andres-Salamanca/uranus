@@ -1,0 +1,126 @@
+{% extends "tasks/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'tasks/css/include/autocomplete-combobox.css' %}" />
+{% endblock %}
+{% block header %}
+<header class="header-box">
+	<img class="logo-jave" src="{% static 'tasks/img/logoPUJ-azul-01.png' %}" alt="Universidad Pontificia Javeriana" />
+	<div class="title-box">
+		<h1 class="title-text">URANUS</h1>
+		<p class="subtitle">Versión 2.0</p>	
+	</div>			
+</header>
+{% endblock %}
+{% block nav %}
+<nav id="nav" class="navigator">
+	<a href="/" class="icon fa-home"><span>Inicio</span></a>
+	<a href="/registro" class="icon fa-id-card-o active"><span>Registro</span></a>
+	<a href="/introduccion" class="icon fa-gamepad"><span>Problemas</span></a>
+	<a href="/contacto" class="icon fa-envelope"><span>Contacto</span></a>
+</nav>
+{% endblock %}
+{% block panel %}
+<!-- Register -->
+<article id="register" class="panel">
+	<form class="register-action" method="post">
+		{% csrf_token %}
+		<div>
+			<div class="row">
+				<div class="title-header">
+					<h2>Registro</h2>
+				</div>
+				<div class="col-6 col-12-medium">
+					<input type="text" name="alias" id="alias" placeholder="Ingresa un sobrenombre, apodo o alias" class="input-action" autocomplete="off">
+				</div>											
+				<div class="col-6 col-12-medium">
+					<input class="w3-animate-opacity disiable" type="text" name="datepicker" id="datepicker" placeholder="Ingresa tu fecha de nacimiento" autocomplete="off">
+				</div>
+				<div class="col-6 col-12-medium">
+					<select id="gender" name="gender" class="w3-animate-opacity gender-action disiable">
+						<option value="" disabled selected>Selecciona tu genero</option>
+						<option value="F">Femenino</option>
+						<option value="M">Masculino</option>
+					</select>
+				</div>
+				<div class="col-6 col-12-medium">
+					<select id="level" name="level" class="level-action w3-animate-opacity disiable">
+						<option value="" disabled selected>Selecciona tu nivel de escolaridad</option>
+						<option value="P">Primaria</option>
+						<option value="S">Secundaria</option>
+						<option value="U">Universitaria</option>
+					</select>	
+				</div>
+				<div id="departament-box" class="col-6 col-12-medium">
+					<select id="departament" name="departament" class="w3-animate-opacity disiable"></select>
+				</div>
+				<div id="city-box" class="col-6 col-12-medium">
+					<select id="city" name="city" class="w3-animate-opacity disiable"></select>	
+				</div>
+				<div id="institute-box" class="col-6 col-12-medium">
+					<select id="institute" name="institute" class="w3-animate-opacity disiable"></select>	
+				</div>								
+				<div id="grade-primary" class="col-6 col-12-medium w3-animate-opacity disiable">
+						<select name="grade_primary" class="grade-primary-action">
+						<option value="" disabled selected>Ingresa tu grado</option>
+						<option value="1g">1°</option>
+						<option value="2g">2°</option>
+						<option value="3g">3°</option>
+						<option value="4g">4°</option>
+						<option value="5g">5°</option>										
+					</select>
+				</div>
+				<div id="grade-secundary" class="col-6 col-12-medium w3-animate-opacity disiable">
+					<select name="grade_secundary" class="grade-secundary-action">
+						<option value="" disabled selected>Ingresa tu grado</option>
+						<option value="6g">6°</option>
+						<option value="7g">7°</option>
+						<option value="8g">8°</option>
+						<option value="9g">9°</option>
+						<option value="10g">10°</option>
+						<option value="11g">11°</option>
+						<option value="12g">12°</option>										
+					</select>
+				</div>
+				<div id="facult" class="col-6 col-12-medium w3-animate-opacity disiable">
+					<input type="text" id="facult" name="facult" placeholder="Ingresa tu facultad" class="facult-action" autocomplete="off">
+				</div>
+				<div class="col-6 col-12-medium">
+					<!-- <input type="text" name="semester" id="semester" placeholder="Ingresa tu semestre" class="semester-action w3-animate-opacity disiable"> -->
+					<select id="semester" name="semester" class="semester-action w3-animate-opacity disiable">
+						<option value="" disabled selected>Ingresa tu semestre</option>
+						<option value="1g">1°</option>
+						<option value="2g">2°</option>
+						<option value="3g">3°</option>
+						<option value="4g">4°</option>
+						<option value="5g">5°</option>	
+						<option value="6g">6°</option>
+						<option value="7g">7°</option>
+						<option value="8g">8°</option>
+						<option value="9g">9°</option>
+						<option value="10g">10°</option>
+						<option value="11g">11°</option>
+						<option value="12g">12°</option>										
+					</select>
+				</div>								
+				<div class="col-12 btn-register">
+					<div class="alert"></div>
+					<input id="reg" type="submit" value="Registrar" class="no-active" disabled />
+					<p class="abeas">En el marco de la ley 1581 de 2012, conocida como Ley de Protección de Datos Personales, al dar clic en el botón de: 'Registrar'; autorizo el tratamiento de mis datos personales para efectos de la investigación en curso con el presente aplicativo.</p>									
+				</div>
+			</div>
+		</div>
+	</form>
+</article>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="{% static 'tasks/js/include/autocomplete-combobox.js' %}"></script>
+<script>
+	var firsht = false;
+	$(document).ready(function() {		
+		$('.fa-home').removeClass('active');
+	});
+</script>
+{% endblock %}

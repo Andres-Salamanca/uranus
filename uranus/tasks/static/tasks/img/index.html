@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+	<style type="text/css">
+		#linear-move-canvas-obj {
+			border: solid 5px black;
+			width: 400px;
+			height: 400px;
+		}
+	</style>
+</head>
+<body>
+<div id="linear-move-canvas-obj"></div>	
+<div>
+	<input type="text" name="timeTB" id="timeTB" placeholder="Time" />
+	<input type="text" name="velocityTB" id="velocityTB" placeholder="Velocity" />
+	<button onclick="run();">START</button>
+</div>
+<script src="jquery.min.js"></script>
+<script src="p5.min.js"></script>
+<script src="sketch.js"></script>
+<script type="text/javascript">
+	function run() {
+		var tM = 200;
+		var vM = 200;
+
+		tTOP = $('#timeTB').val();
+		velocity = $('#velocityTB').val();
+
+		xLimit = 390;
+		m = xLimit / (tM * vM);
+		runFlag = true;
+	}
+</script>
+</body>
+</html>
