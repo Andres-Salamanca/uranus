@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
+import json
 class Department(models.Model):
 	name = models.CharField(max_length=100)
 
@@ -46,9 +46,19 @@ class ResoluterXSchool(models.Model):
 	grade = models.CharField(max_length=5)
 
 class ResoluterSession(models.Model):
-	resoluter = models.ForeignKey(Resoluter, on_delete=models.CASCADE)
-	game_cursor = models.IntegerField()
-	order = ArrayField(models.IntegerField(), blank=True)
+    resoluter = models.ForeignKey(Resoluter, on_delete=models.CASCADE)
+    game_cursor = models.IntegerField()
+    order = models.TextField(blank=True)  # Change to TextField
+
+    def save(self, *args, **kwargs):
+        # Serialize the list to a JSON string
+        if isinstance(self.order, list):
+            self.order = json.dumps(self.order)
+        super().save(*args, **kwargs)
+
+    def get_order(self):
+        # Deserialize the JSON string back to a list
+        return json.loads(self.order) if self.order else []
 
 class Problem(models.Model):
 	name = models.CharField(max_length=50)
@@ -90,7 +100,7 @@ class Representation(models.Model):
 
 class ClassTag(models.Model):
 	name = models.CharField(max_length=50)
-	patterns = ArrayField(models.CharField(max_length=50), blank=True)
+	patterns = models.CharField(max_length=255, blank=True)
 
 class ContactObj(models.Model):
 	name = models.CharField(max_length=50)

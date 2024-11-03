@@ -187,8 +187,11 @@ def registerAction(request):
 		game_cursor = 0,
 		order = ordr
 	)
+	print(rlter)	
+	print(resoluterSession.__dict__)	
+	print("antessvae")	
 	resoluterSession.save()	
-
+	print("despuesvae")	
 	# Return response
 	context = {
 		'msg': '',
@@ -266,16 +269,24 @@ def problem(request):
 	session = None
 	# Get session
 	sessionID = request.POST['user-session']
+	print(sessionID)
 	# Check the session ID
 	if sessionID == '-1':
 		return HttpResponseRedirect('/registro')
 	sessionID = int(sessionID)		
 	sesQS = ResoluterSession.objects.filter(id = sessionID)	
+	print(sesQS)	
 	# Check the session
 	if len(sesQS) > 0:
 		session = sesQS[0]
 	# Selects the view
-	problemsQS = Problem.objects.filter(id = session.order[session.game_cursor])
+	print("antes de consguir orded")
+	print( session)
+	print( session.order)
+	print( session.get_order())
+	print( session.get_order()[session.game_cursor])
+	problemsQS = Problem.objects.filter(id =  session.get_order()[session.game_cursor])
+	print("despues de consguir orded")
 	problem = problemsQS[0]
 	view = 'tasks/' + problem.view_class
 	# Log of the start resolution
@@ -371,7 +382,7 @@ def newProblem(request):
 	# Check the cursor	
 	if session.game_cursor < 3:
 		# Selects the view
-		problemsQS = Problem.objects.filter(id = session.order[session.game_cursor])
+		problemsQS = Problem.objects.filter(id =  session.get_order()[session.game_cursor])
 		problem = problemsQS[0]
 		view = problem.name
 		view = 'tasks/' + problem.view_class
@@ -392,7 +403,8 @@ def newProblem(request):
 		if session.game_cursor == 3:
 			firsht = 1
 		# Selects the view
-		problemsQS = Problem.objects.filter(id = session.order[session.game_cursor - 3])
+		problemsQS = Problem.objects.filter(id =  session.get_order()[session.game_cursor-3])
+        #problemsQS = Problem.objects.filter(id = session.order[session.game_cursor - 3])
 		problem = problemsQS[0]
 		view = problem.name
 		view = 'tasks/' + problem.view_class
