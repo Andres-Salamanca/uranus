@@ -8,7 +8,7 @@ from random import randint
 from datetime import datetime
 from os import system
 import os
-
+from django.conf import settings
 #============================================================
 # WELCOME
 #============================================================
@@ -440,10 +440,10 @@ def newProblem(request):
 # AUDIO
 #============================================================
 
-# Define path file
-PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PATH = PATH.replace('uranus', '')	
-
+# Define the path to the directory above the Django project root
+PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+# Construct the path to the Java directory within PATH
+JAVA_DATA_PATH = os.path.join(PATH, 'java', 'UranusCB-V2.0', 'data', 'audio')
 # Recieve audio from host
 def sendAction(request):
 	handle_uploaded_file(request.FILES['.wav'], request.POST['name'])
@@ -462,10 +462,11 @@ def handle_uploaded_file(f, name):
 			if c == 'p':
 				break
 	# Check the report folder
-	directory = None
+	directory = os.path.join(JAVA_DATA_PATH, folder)
 	try:
-		directory = os.path.join(PATH, 'java', 'UranusCB-V2.0', 'data', 'audio', folder)
+		
 		if not os.path.exists(directory):
+			print(f"creando directorio en {directory}")
 			os.mkdir(directory);
 		with open(os.path.join(directory, name), 'wb+') as destination:
 			for chunk in f.chunks():
