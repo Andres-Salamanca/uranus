@@ -195,12 +195,21 @@ function validateForm() {
 	departament = $('#departament').val();
 	city = $('#city').val();
 	institute = $('#institute').val();
+      console.log("Alias:", alias);
+    console.log("Datepicker:", datepicker);
+    console.log("Gender:", gender);
+    console.log("Level:", level);
+    console.log("Departament:", departament);
+    console.log("City:", city);
+    console.log("Institute:", institute);
 	if (alias != '' && datepicker != '' && gender != '' && 
 		level != '' && departament != '' && city != '' && institute) {
-		
+		console.log("holaa")
 		if ($('#global').attr('university') === 'true') {
-			facult = $('#facult').val();
+			facult = $('input#facult').val();
 			semester = $('#semester').val();
+      console.log("Facult:", facult);
+      console.log("Semester:", semester);
 			if (facult === '' || semester === '') {
 				return false;
 			}
