@@ -33,9 +33,11 @@ class ExportCsvMixin:
 	# Data process function
 	def export_as_csv(self, request, queryset):
 		# Define variables
-		BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-		REPORT = BASE.replace('uranus', '')
-		PATH = BASE.replace('uranus', '')		
+
+		BASE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+		print(BASE)
+		REPORT = BASE
+		PATH = BASE		
 		sistemaop = os.name
 		if sistemaop == 'posix':
 			PATH = os.path.join(PATH, 'java', 'UranusCB-V2.0', 'launch.sh')
@@ -49,6 +51,7 @@ class ExportCsvMixin:
 			try:
 				directory = os.path.join(REPORT, 'java', 'UranusCB-V2.0', 'data', 'capture', resoluterID)
 				if not os.path.exists(directory):
+					print(f"directory created in {directory}")
 					os.mkdir(directory);
 			except IOError as e:
 				messages.warning(request, 'Problema E001: por favor contactar a soporte.')
