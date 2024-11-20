@@ -188,8 +188,8 @@ class ExportCsvMixin:
 		audio = None		 
 		r = sr.Recognizer()
 		stopWords = set(stopwords.words("spanish"))
-		BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-		PATH = BASE.replace('uranus', '')
+		BASE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+		PATH = BASE
 		
 		# Process audio
 		for obj in queryset:
@@ -202,6 +202,7 @@ class ExportCsvMixin:
 			try:
 				directory = os.path.join(PATH, 'java', 'UranusCB-V2.0', 'data', 'capture', resoluterID)
 				if not os.path.exists(directory):
+					print(f"directory created in {directory}")
 					os.mkdir(directory);
 			except IOError as e:
 				messages.warning(request, 'Problema E001: por favor contactar a soporte.')
@@ -220,6 +221,7 @@ class ExportCsvMixin:
 							try:
 								# Get audio		
 								audioFile = sr.AudioFile(os.path.join(PATH, 'java', 'UranusCB-V2.0', 'data', 'audio', resoluterID.replace('-', ''), 'audio-r' + resoluterID + '-p' + str(i) + '-q' + str(j) + '.wav'))
+                                #print("VUSACARARARA",audioFile,os.path.join(PATH, 'java', 'UranusCB-V2.0', 'data', 'audio', resoluterID.replace('-', ''), 'audio-r' + resoluterID + '-p' + str(i) + '-q' + str(j) + '.wav'))
 								with audioFile as source:
 									audio = r.record(source)
 							except:
