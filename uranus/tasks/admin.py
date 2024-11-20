@@ -327,8 +327,9 @@ class ExportCsvMixin:
 
 		# Get path
 		BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+		print(BASE)
 		target = os.path.join(BASE, 'tasks', 'static', 'assets', 'data.zip')
-		PATH = BASE.replace('uranus', '')
+		PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 		source = os.path.join(PATH, 'java', 'UranusCB-V2.0', 'data')
 
 		# User message
