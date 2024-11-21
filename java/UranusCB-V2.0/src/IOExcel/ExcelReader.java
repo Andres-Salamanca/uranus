@@ -19,7 +19,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.EmptyFileException;
 /**
  *
  * @author takina
@@ -38,11 +39,23 @@ public class ExcelReader {
         String[] arrayHeaders = null;
 
         try {
-            excelStream = new FileInputStream(excelFile);
-            // Creating a Workbook from an Excel file (.xls or .xlsx)
-            workbook = WorkbookFactory.create(excelStream);
+          System.out.println(excelFile.getPath() + " " + excelFile.canRead());
+            if (excelFile == null || !excelFile.exists()) {
+                System.out.println("El archivo no existe.");
+                return;
+            }
 
-            // Retrieving the number of sheets in the Workbook
+            excelStream = new FileInputStream(excelFile);
+            System.out.println(excelStream.available());
+            System.out.println(excelStream);
+            workbook = WorkbookFactory.create(excelStream); // Intentamos crear el Workbook
+
+            // Verificar que se haya creado el Workbook
+            if (workbook == null) {
+                System.out.println("No se pudo crear el Workbook.");
+                return;
+            }       
+
             System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
 
             //   ==================================================================
@@ -100,10 +113,21 @@ public class ExcelReader {
             }
             //--------------------------------------------------------------
 
-        } catch (FileNotFoundException fileNotFoundException) {
-            System.out.println("The file not exists (No se encontró el archivo): " + fileNotFoundException);
-        } catch (IOException ex) {
-            System.out.println("Error in file procesing (Error al procesar el archivo): " + ex);
+        }catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("El archivo no se encuentra: " + fileNotFoundException.getMessage());
+        } catch (IOException ioException) {
+            System.out.println("Error de entrada/salida: " + ioException.getMessage());
+        } catch (EncryptedDocumentException encryptedDocException) {
+            System.out.println("El archivo Excel está protegido con contraseña: " + encryptedDocException.getMessage());
+        } catch (EmptyFileException emptyFileException) {
+            System.out.println("El archivo está vacío: " + emptyFileException.getMessage());
+        } catch (InvalidFormatException invalidFormatException) {
+            System.out.println("Formato de archivo no válido: " + invalidFormatException.getMessage());
+        } catch (RuntimeException runtimeException) {
+            System.out.println("Se produjo un error en tiempo de ejecución: " + runtimeException.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error general: " + e.getMessage());
         } finally {
             try {
                 // Closing the workbook

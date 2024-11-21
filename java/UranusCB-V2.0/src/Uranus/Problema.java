@@ -72,7 +72,6 @@ public class Problema {
 
                 if (sCarpeta != null && !sCarpeta.contains(".gitignore")) {
                     sArchivo = sDirectorio + File.separator + sCarpeta + File.separator + "session_0.xlsx";
-
                     try {
                         // lee el archivo excel del resolutor y la almacena
                         readerExcelFiles.readExcelToArray(new File(sArchivo), this);

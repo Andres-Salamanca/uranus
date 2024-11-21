@@ -24,7 +24,6 @@ public class Principal {
         if (path.contains("dist"))
             path = path.replace(File.separator + "dist", "");
         String sDirectorio = path + File.separator + "data" + File.separator + "capture";
-            
         Problema movimiento = new Problema("Problema de movimiento rectilineo");
         
         if ( movimiento.loadInformation( sDirectorio ) ) {
