@@ -178,8 +178,16 @@ class ExportCsvMixin:
 		self.message_user(request,"La información fue generada [OK].")
 
 		# Call java application
+		print(PATH)
 		proc = Popen(PATH, shell = True, close_fds = True)
 		stdout, stderr = proc.communicate()
+		print(proc.returncode)
+		if proc.returncode == 0:
+                	self.message_user(request, "Java application executed successfully [OK].")
+                	print(stdout)
+		else:
+                	self.message_user(request, "Java application failed. Check logs for details.")
+                	print(stderr)
 		self.message_user(request,"Generación de resultados [OK].")
 
 	# Audio process function
