@@ -38,7 +38,7 @@ fi
 
 # Conda setup
 echo "Creating Conda environment..."
-conda env create -f environmentmyml.yml
+conda env create -f environment.yml
 
 echo "Updating Conda base environment..."
 conda update -n base -c defaults conda
