@@ -22,7 +22,6 @@ else
     mkdir -p ~/miniconda3
     curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
     bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-    rm ~/miniconda3/miniconda.sh
     source ~/miniconda3/bin/activate
   else
     echo "Unsupported OS: $OS"
@@ -35,7 +34,8 @@ if ! command -v conda >/dev/null 2>&1; then
   echo "Conda could not be activated. Please check your installation."
   exit 1
 fi
-
+# Initialize Conda for the script
+eval "$(conda shell.bash hook)"
 # Conda setup
 echo "Creating Conda environment..."
 conda env create -f environment.yml
@@ -44,7 +44,7 @@ echo "Activating Conda environment"
 conda activate uranus_env
 
 echo "Updating Conda base environment..."
-conda update -n base -c defaults conda
+#conda update -n base -c defaults conda
 
 # Check Java installation
 echo "Checking Java installation..."
@@ -66,9 +66,8 @@ fi
 
 # Application setup
 echo "Setting up the application..."
-# Run the install script
-echo "Running install.py..."
-python install.py
+
+
 # Navigate to the application directory
 cd uranus/ || { echo "Directory 'uranus/' not found."; exit 1; }
 
