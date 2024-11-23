@@ -66,7 +66,9 @@ fi
 
 # Application setup
 echo "Setting up the application..."
-
+# Run the install script
+echo "Running install.py..."
+python install.py
 # Navigate to the application directory
 cd uranus/ || { echo "Directory 'uranus/' not found."; exit 1; }
 
@@ -78,9 +80,7 @@ python manage.py migrate
 echo "Creating Django superuser..."
 python manage.py createsuperuser
 
-# Run the install script
-echo "Running install.py..."
-python install.py
+
 
 # Navigate to the Java build directory
 echo "Building Java components..."
