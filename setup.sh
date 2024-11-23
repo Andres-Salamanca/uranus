@@ -29,11 +29,7 @@ else
   fi
 fi
 
-# Ensure Conda is activated
-if ! command -v conda >/dev/null 2>&1; then
-  echo "Conda could not be activated. Please check your installation."
-  exit 1
-fi
+
 # Initialize Conda for the script
 eval "$(conda shell.bash hook)"
 # Conda setup
@@ -51,7 +47,7 @@ echo "Checking Java installation..."
 if command -v java >/dev/null 2>&1 && command -v javac >/dev/null 2>&1; then
   echo "Java and Javac are installed."
 else
-  echo "Java or Javac not found. Please install them."
+  echo "Java or Javac not found. Please install them. you can use java -version and javac -version"
   exit 1
 fi
 
