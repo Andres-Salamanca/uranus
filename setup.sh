@@ -40,6 +40,9 @@ fi
 echo "Creating Conda environment..."
 conda env create -f environment.yml
 
+echo "Activating Conda environment"
+conda activate uranus_env
+
 echo "Updating Conda base environment..."
 conda update -n base -c defaults conda
 
