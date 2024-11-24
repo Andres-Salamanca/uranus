@@ -4,10 +4,10 @@ setlocal enabledelayedexpansion
 REM Detectar si Conda ya está instalado
 where conda >nul 2>nul
 if %errorlevel% equ 0 (
-    echo Conda ya está instalado.
+    echo Conda ya esta instalado.
     goto activate_env
 ) else (
-    echo Conda no está instalado. Procediendo con la instalación...
+    echo Conda no esta instalado. Procediendo con la instalacion...
 )
 
 REM Descargar e instalar Miniconda
@@ -17,7 +17,7 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-start /wait "" .\miniconda.exe /S 
+start /wait "" .\miniconda.exe /S /D=%USERPROFILE%\Miniconda3
 if %errorlevel% neq 0 (
     echo Error al instalar Miniconda.
     del miniconda.exe
@@ -26,13 +26,15 @@ if %errorlevel% neq 0 (
 
 
 echo Miniconda instalado exitosamente.
+REM Agregar Miniconda al PATH temporalmente para esta sesión
+set "PATH=%USERPROFILE%\Miniconda3;%USERPROFILE%\Miniconda3\Scripts;%USERPROFILE%\Miniconda3\Library\bin;%PATH%"
 
 
 
 REM Verificar la instalación de Conda
 where conda >nul 2>nul
 if %errorlevel% neq 0 (
-    echo Error: No se pudo encontrar Conda después de la instalación.
+    echo Error: No se pudo encontrar Conda después de la instalacion.
     exit /b 1
 )
 
@@ -52,7 +54,7 @@ if %errorlevel% neq 0 (
 )
 
 REM Continuar con los comandos de configuración de la aplicación
-echo Configurando la aplicación...
+echo Configurando la aplicacion...
 REM Aquí puedes agregar comandos específicos para tu aplicación, por ejemplo:
 cd uranus\
 python manage.py migrate
