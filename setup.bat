@@ -17,14 +17,13 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-start /wait "" .\miniconda.exe /S /D=%USERPROFILE%\Miniconda3
+start /wait "" .\miniconda.exe /S 
 if %errorlevel% neq 0 (
     echo Error al instalar Miniconda.
     del miniconda.exe
     exit /b 1
 )
 
-REM Eliminar el instalador para ahorrar espacio
 
 echo Miniconda instalado exitosamente.
 
