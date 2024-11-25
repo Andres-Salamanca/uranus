@@ -11,18 +11,18 @@ else
   echo "Conda is not installed. Proceeding with installation..."
 fi
   
-  # Miniconda installation
-echo "Setting up Miniconda for Linux..."
+echo "Setting up Miniconda for macOS..."
 mkdir -p ~/miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
 bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 source ~/miniconda3/bin/activate
+conda init --all
 
 # Initialize Conda for the script
-eval "$(conda shell.bash hook)"
+eval "$(conda shell.zsh hook)"
 # Conda setup
 echo "Creating Conda environment..."
-conda env create -f environment.yml
+conda env create -f environmentMac.yml
 
 echo "Activating Conda environment"
 conda activate uranus_env
@@ -81,4 +81,3 @@ echo "Starting the Django development server..."
 python manage.py runserver
 
 echo "Setup and application startup completed successfully."
-
