@@ -1,9 +1,12 @@
 # uranusjave
 
-## Uranus
+## Uranus 🌌
 
 ### Introducción  
+Proyecto Cambio Cognitivo Pontificia Universis Javeriana - Departamento de Psicología.
+
 Este proyecto utiliza herramientas para la configuración automática de su entorno en Linux, macOS y Windows. A continuación, se detallan los pasos para ejecutar los scripts y preparar el sistema.
+
 ---
 ### Documentación
 Para más detalles sobre la instalación y configuración en macOS, consulte el archivo **`Guía de Instalación en macOS.docx`**.  
@@ -18,7 +21,7 @@ Este documento ofrece instrucciones específicas y pasos detallados para solucio
 - **Propósito**: Instala Homebrew y herramientas necesarias en sistemas macOS.
 - **Uso**: 
   ```bash
-  bash install_brew_and_tools.sh
+   ./install_brew_and_tools.sh
   ```
 - Ejecutar este script antes de configurar el entorno en macOS.
 
@@ -26,7 +29,7 @@ Este documento ofrece instrucciones específicas y pasos detallados para solucio
 - **Propósito**: Configura el entorno para Linux.
 - **Uso**:
   ```bash
-  bash setup.sh
+  ./setup.sh
   ```
 - Asegúrese de que `conda` esté correctamente instalado o será instalado automáticamente.
 
@@ -34,7 +37,7 @@ Este documento ofrece instrucciones específicas y pasos detallados para solucio
 - **Propósito**: Configura el entorno para macOS.
 - **Uso**:
   ```bash
-  bash setupMac.sh
+  ./setupMac.sh
   ```
 - Diseñado específicamente para macOS con soporte para Conda.
 
@@ -65,7 +68,7 @@ Si encuentra problemas, no dude en contactarnos o revisar la documentación ofic
 
 
 
-Proyecto Cambio Cognitivo Pontificia Universis Javeriana - Departamento de Psicología.
+---
 
 [Install]
 apt-get install curl
